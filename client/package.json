@@ -1,0 +1,94 @@
+{
+	"name": "vscode",
+	"displayName": "excite-vscode",
+	"publisher": "excite",
+	"description": "",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.76.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onLanguage:markdown"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"viewsContainers": {
+			"panel": [
+				{
+					"id": "excite-vscode",
+					"title": "excite",
+					"icon": "src/icon.png"
+				}
+			]
+		},
+		"commands": [
+			{
+				"command": "excite-vscode.init",
+				"title": "Set up directory",
+				"category": "Excite"
+			},
+			{
+				"command": "excite-vscode.insertKnownReference",
+				"title": "Insert known reference",
+				"category": "Excite"
+			},
+			{
+				"command": "excite-vscode.build",
+				"title": "Build project",
+				"category": "Excite"
+			},
+			{
+				"command": "excite-vscode.searchCitation",
+				"title": "Search for a Citation",
+				"category": "Excite"
+			},
+			{
+				"command": "excite-vscode.recommendSource",
+				"title": "Recommend a source",
+				"category": "Excite"
+			},
+			{
+				"command": "excite-vscode.recommendCitation",
+				"title": "Find Citation",
+				"category": "Excite"
+			},
+			{
+				"command": "excite-vscode.autoRecommendation",
+				"title": "Start automatic recommendations",
+				"category": "Excite"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/glob": "^8.1.0",
+		"@types/mocha": "^10.0.1",
+		"@types/node": "16.x",
+		"@types/vscode": "^1.76.0",
+		"@typescript-eslint/eslint-plugin": "^5.53.0",
+		"@typescript-eslint/parser": "^5.53.0",
+		"@vscode/test-electron": "^2.2.3",
+		"eslint": "^8.34.0",
+		"glob": "^8.1.0",
+		"mocha": "^10.2.0",
+		"typescript": "^4.9.5"
+	},
+	"dependencies": {
+		"@types/tmp": "^0.2.3",
+		"axios": "^1.3.4",
+		"natural": "^6.3.0",
+		"tmp": "^0.2.1",
+		"vscode-languageclient": "^8.1.0",
+		"zod": "^3.21.4"
+	}
+}
