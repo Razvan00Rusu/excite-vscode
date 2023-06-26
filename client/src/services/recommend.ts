@@ -23,13 +23,11 @@ export async function recommendReferenceByLocalContext(localContext: string) {
   const res = await axios.get("http://localhost:3000/", {
     data: {
       inference: [
-        {
-          context: localContext,
-        },
-      ],
+        {context: localContext}
+      ]
     },
   });
-  console.log(res);
+  console.log(res.data);
   let recommendations: z.infer<typeof INFERENCES>;
   try {
     recommendations = INFERENCES.parse(res.data);

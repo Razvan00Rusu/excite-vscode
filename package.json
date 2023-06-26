@@ -9,7 +9,9 @@
 		"url": "https://github.com/Microsoft/vscode-extension-samples"
 	},
 	"publisher": "Razvan_Rusu",
-	"categories": ["Education"],
+	"categories": [
+		"Education"
+	],
 	"keywords": [
 		"context-sensitive",
 		"reference manager"
@@ -48,12 +50,12 @@
 			},
 			{
 				"command": "excite-vscode.searchCitation",
-				"title": "Search for a Citation",
+				"title": "Search for a reference",
 				"category": "Excite"
 			},
 			{
 				"command": "excite-vscode.recommendSource",
-				"title": "Recommend a source",
+				"title": "Recommend Reference",
 				"category": "Excite"
 			},
 			{
@@ -63,7 +65,7 @@
 			},
 			{
 				"command": "excite-vscode.autoRecommendation",
-				"title": "Start automatic recommendations",
+				"title": "Start automatic recommendation",
 				"category": "Excite"
 			}
 		],
@@ -97,7 +99,8 @@
 		"watch": "tsc -b -w",
 		"lint": "eslint ./client/src ./server/src --ext .ts,.tsx",
 		"postinstall": "cd client && npm install && cd ../server && npm install && cd ..",
-		"test": "sh ./scripts/e2e.sh"
+		"test": "sh ./scripts/e2e.sh",
+		"coverage": "c8 --check-coverage npm run test"
 	},
 	"devDependencies": {
 		"@types/glob": "^8.1.0",
@@ -107,6 +110,7 @@
 		"@typescript-eslint/eslint-plugin": "^5.53.0",
 		"@typescript-eslint/parser": "^5.53.0",
 		"@vscode/test-electron": "^2.2.3",
+		"c8": "^8.0.0",
 		"eslint": "^8.34.0",
 		"glob": "^8.1.0",
 		"mocha": "^10.2.0",

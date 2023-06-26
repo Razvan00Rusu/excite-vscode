@@ -7,6 +7,7 @@ import { searchForReference } from "../services/search";
 import { generateAutoRecommendationHTML } from "../workspace/webviews/autoRecommendationResultsView";
 import { addToRefFile } from "../workspace/workspace";
 import { CommandResult } from './helpers';
+import { runCommand } from '../workspace/terminal';
 
 export async function autoRecommendation(
   context: vscode.ExtensionContext
@@ -107,6 +108,15 @@ export async function autoRecommendation(
     } else {
       vscode.window.showInformationMessage("Added source to references.");
     }
+    runCommand('pandoc', [
+			'-f',
+			'bibtex',
+			'-t',
+			'csljson',
+			'.excite/ref.bib',
+			'-o',
+			'.excite/ref.csl.json',
+		]);
     const formattedCitekey = `[@${citekey}]`;
     const insertCiteKey = await editor.edit((editBuilder) => {
       editBuilder.replace(occurences[i], formattedCitekey);

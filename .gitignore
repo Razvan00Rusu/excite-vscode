@@ -4,3 +4,6 @@ client/server
 .vscode-test
 *.vsix
 *.vsix.zip
+coverage
+.c8rc
+.DS_Store

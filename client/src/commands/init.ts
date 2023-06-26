@@ -62,6 +62,7 @@ export default async function initialiseWorkspace(
 				new TextEncoder().encode(
 					JSON.stringify({
 						entry: 'main.md',
+						serverIP: "http://localhost:3000"
 					})
 				)
 			);

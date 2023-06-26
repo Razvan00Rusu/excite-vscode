@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import { z } from "zod";
 import { CSL_JSON } from "../types/csl-json";
 import { EXCITE_CONFIG } from "../types/excite-config";
-import { runCommandInTerminal } from "../workspace/terminal";
+import { runCommand, runCommandInTerminal } from "../workspace/terminal";
 import { isInWorkspace } from "../workspace/workspace";
 import { CommandResult } from './helpers';
 
@@ -61,12 +61,27 @@ export async function buildProject(context: vscode.ExtensionContext) : Promise<C
 
         try {
           console.log("first command");
-          await runCommandInTerminal("rm .excite/ref.csl.json");
-          await runCommandInTerminal("rm -rf ./out");
+          
+          try {
+						runCommand('rm', ['.excite/ref.csl.json']);
+					} catch (e) {
+						console.log('Yo1', e);
+					}
+          try {
+            runCommand('rm', ['-rf, ./out']);
+          } catch (e) {
+            console.log("Yo2", e);
+          }
           console.log("second command");
-          await runCommandInTerminal(
-            "pandoc -f bibtex -t csljson .excite/ref.bib -o .excite/ref.csl.json"
-          );
+          runCommand('pandoc', [
+						'-f',
+						'bibtex',
+						'-t',
+						'csljson',
+						'.excite/ref.bib',
+						'-o',
+						'.excite/ref.csl.json',
+					]);
         } catch (err) {
           console.log("terminal err", err);
           return;
@@ -99,17 +114,17 @@ export async function buildProject(context: vscode.ExtensionContext) : Promise<C
         // let entry = await vscode.workspace.fs.readFile(
         //   vscode.Uri.joinPath(workspaceFolder[0].uri, configJson.entry)
         // ).then(res => res.toString());
-
-        await runCommandInTerminal(
-          "mkdir out/"
-        );
+        try {
+          runCommand('mkdir', ['out/']);
+        } catch {}
+        
         // await vscode.workspace.fs.writeFile(
         //   vscode.Uri.joinPath(workspaceFolder[0].uri, `out/${configJson.title}.md`),
         //   new TextEncoder().encode(entry)
         // );
         // console.log("entry", entry);
 
-        await runCommandInTerminal(`pandoc -C ${configJson.entry} -o out/test.pdf`);
+        runCommand("pandoc", ["-C", configJson.entry, "-o", "out/out.pdf"]);
       }
     );
     return {
